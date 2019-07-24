@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+
+# Rest
+Algorithms/build
+Algorithms/CMakeLists.txt.user
+Algorithms/CMakeCache.txt
+Algorithms/CMakeFiles
+Algorithms/CMakeScripts
+Algorithms/Testing
+Algorithms/Makefile
+Algorithms/cmake_install.cmake
+Algorithms/install_manifest.txt
+Algorithms/compile_commands.json
+Algorithms/CTestTestfile.cmake
+Algorithms/_deps

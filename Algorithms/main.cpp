@@ -228,6 +228,94 @@ void BFS (Graph& graph, const int begin)
     //std::cout << std::endl;
 }
 
+// simple swap
+void swap(int& a, int& b)
+{
+    int tmp = a;
+    a = b;
+    b = tmp;
+}
+
+// permutation function it is 
+void heapPermutation(int array[], int position, const int N) 
+{ 
+    // if size becomes 1 then prints the obtained 
+    // permutation 
+    if (position == 1) 
+    { 
+        //leaf of tree
+        for (int i = 0; i < N; ++i) 
+            std::cout << array[i] << " ";
+        std::cout << std::endl;
+        return; 
+    } 
+  
+    for (int i = 0; i < position; i++) 
+    { 
+        heapPermutation(array, position-1, N); 
+  
+        // if size is odd, swap first and last 
+        // element 
+        if (position % 2 == 1) 
+            swap(array[0], array[position - 1]); 
+  
+        // If size is even, swap ith and last 
+        // element 
+        else
+            swap(array[i], array[position-1]); 
+    } 
+} 
+
+// main func for heap permutation
+void startHeapPermutation(int array[], const int N)
+{
+    heapPermutation(array, N, N);
+}
+
+// To heapify a subtree rooted with node i which is 
+// an index in arr[]. n is size of heap 
+void heapify(int arr[], int n, int i) 
+{ 
+    int largest = i; // Initialize largest as root 
+    int l = 2*i + 1; // left = 2*i + 1 
+    int r = 2*i + 2; // right = 2*i + 2 
+  
+    // If left child is larger than root 
+    if (l < n && arr[l] > arr[largest]) 
+        largest = l; 
+  
+    // If right child is larger than largest so far 
+    if (r < n && arr[r] > arr[largest]) 
+        largest = r; 
+  
+    // If largest is not root 
+    if (largest != i) 
+    { 
+        swap(arr[i], arr[largest]); 
+  
+        // Recursively heapify the affected sub-tree 
+        heapify(arr, n, largest); 
+    } 
+} 
+
+// main function to do heap sort 
+void heapSort(int arr[], int n) 
+{ 
+    // Build heap (rearrange array) 
+    for (int i = n / 2 - 1; i >= 0; i--) 
+        heapify(arr, n, i); 
+  
+    // One by one extract an element from heap 
+    for (int i=n-1; i>=0; i--) 
+    { 
+        // Move current root to end 
+        swap(arr[0], arr[i]); 
+  
+        // call max heapify on the reduced heap 
+        heapify(arr, i, 0); 
+    } 
+} 
+
 // print all neighboring vertices of given vertex
 void printList(Node* ptr)
 {
@@ -271,6 +359,21 @@ int main(int argc, char* argv[])
 		// print all its neighboring vertices
 		printList(graph.head[i]);
 	}
+
+    int arr[] = {1, 2, 3};
+    startHeapPermutation(arr, 3); 
+
+    std::cout << std::endl;
+
+    int arrHeap[] = {12, 11, 13, 5, 6, 7}; 
+    int NHeap = sizeof(arrHeap)/sizeof(arrHeap[0]); 
+  
+    heapSort(arrHeap, NHeap);
+
+    for (int i = 0; i < NHeap; ++i) 
+        std::cout << arrHeap[i] << " "; 
+    std::cout << "\n"; 
+
 
     std::cout << "<END>" << std::endl;    
     return 0;
